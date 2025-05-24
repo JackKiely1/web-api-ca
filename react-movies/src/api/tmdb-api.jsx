@@ -94,7 +94,7 @@ export const getMovie = (args) => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+      `http://localhost:8080/api/movies/upcoming`
     )
       .then((response) => {
         if (!response.ok) {
@@ -110,7 +110,7 @@ export const getMovie = (args) => {
   };
   
   export const getTopRated = () => {
-    return  fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`)
+    return  fetch(`http://localhost:8080/api/movies/toprated`)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((error) => {
