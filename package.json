@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@tanstack/react-query": "^5.77.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.77.0"
+  }
+}
