@@ -69,7 +69,7 @@ const SiteHeader = () => {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={() => handleMenuSelect("/")}>Home</MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/discover")}>Discover</MenuItem>
                 <MenuItem onClick={() => handleMenuSelect("/movies/upcoming")}>
                   Upcoming
                 </MenuItem>
@@ -94,14 +94,14 @@ const SiteHeader = () => {
                 color="inherit"
                 onClick={(e) => setHomeMenuEl(e.currentTarget)}
               >
-                Home
+                Discover Movies
               </Button>
               <Menu
                 anchorEl={homeMenuEl}
                 open={Boolean(homeMenuEl)}
                 onClose={() => setHomeMenuEl(null)}
               >
-                <MenuItem onClick={() => handleMenuSelect("/")}>Home</MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/discover")}>Discover</MenuItem>
                 <MenuItem onClick={() => handleMenuSelect("/movies/upcoming")}>
                   Upcoming
                 </MenuItem>
