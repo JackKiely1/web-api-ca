@@ -20,6 +20,9 @@ import StartPage from "./pages/startPage";
 import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signUpPage";
 import ProfilePage from "./pages/profilePage";
+import AuthContextProvider from "./contexts/authContext";
+import ProtectedRoutes from "./protectedRoutes";
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,18 +36,21 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <MoviesContextProvider>
-          <SiteHeader />
-          <Routes>
-            {/* New routes */}
-            <Route path="/" element={<StartPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
 
-            {/* Existing routes */}
+   <QueryClientProvider client={queryClient}>
+  <BrowserRouter>
+    <AuthContextProvider>
+      <MoviesContextProvider>
+        <SiteHeader />
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<StartPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+
+          {/* Updated Protected routes */}
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
             <Route path="/reviews/:id" element={<MovieReviewPage />} />
             <Route path="/movies/:id" element={<MoviePage />} />
@@ -54,14 +60,17 @@ const App = () => {
             <Route path="/movies/watchlist" element={<WatchPlaylistPage />} />
             <Route path="/movies/popular" element={<PopularPage />} />
             <Route path="/discover" element={<HomePage />} />
+          </Route>
 
-            {/* fallback */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </MoviesContextProvider>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+          {/* fallback */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </MoviesContextProvider>
+    </AuthContextProvider>
+  </BrowserRouter>
+  <ReactQueryDevtools initialIsOpen={false} />
+</QueryClientProvider>
+
   );
 };
 
