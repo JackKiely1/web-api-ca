@@ -17,7 +17,7 @@ const LoginPage = () => {
 
     // Redirect after login
     if (context.isAuthenticated && submitted) {
-        return <Navigate to="/discover" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return (
