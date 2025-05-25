@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext"; // Adjust path if needed
+import { AuthContext } from "../contexts/authContext"; 
 import { Link } from "react-router-dom";
 
 const StartPage = () => {

@@ -39,3 +39,4 @@ export const getTopRated = async () => {
   return await response.json();
 };
 
+
