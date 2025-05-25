@@ -2,6 +2,7 @@ import express from 'express';
 import User from './userModel';
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
+import favouritesRouter from './favourites.js';
 
 
 
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(users);
 });
 
-//.... code as before
+router.use('/favourites', favouritesRouter);
 
 // register(Create)/Authenticate User
 router.post('/', asyncHandler(async (req, res) => {
