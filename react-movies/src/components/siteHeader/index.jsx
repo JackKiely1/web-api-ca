@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+
+// new import for auth context
+import { AuthContext } from "../../contexts/authContext"; 
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -32,6 +35,8 @@ const SiteHeader = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
+  const context = useContext(AuthContext); // access auth status
+
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL);
     setHomeMenuEl(null);
@@ -45,8 +50,6 @@ const SiteHeader = () => {
           <CustomTypography variant="h5" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => navigate("/")} >
             TMDB Client
           </CustomTypography>
-
-
 
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
@@ -134,6 +137,31 @@ const SiteHeader = () => {
               </Menu>
             </>
           )}
+
+          {/* Auth buttons block visability */}
+          {context.isAuthenticated ? (
+            <>
+              <Typography variant="body1" sx={{ marginLeft: 2 }}>
+                Welcome, {context.userName}
+              </Typography>
+              <Button color="inherit" onClick={() => context.signout()}>
+                Sign out
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/profile")}>
+                Profile
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" onClick={() => navigate("/login")}>
+                Login
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/signup")}>
+                Signup
+              </Button>
+            </>
+          )}
+
         </Toolbar>
       </CustomAppBar>
       <Offset />
@@ -142,4 +170,3 @@ const SiteHeader = () => {
 };
 
 export default SiteHeader;
-
